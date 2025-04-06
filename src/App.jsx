@@ -1,19 +1,13 @@
 import { Accordion } from "@chakra-ui/react"
+import Header from "./components/Header"
 
 function App() {
 
 
   return (
-    <Accordion.Root>
-  <Accordion.Item>
-    <Accordion.ItemTrigger>
-      <Accordion.ItemIndicator />
-    </Accordion.ItemTrigger>
-    <Accordion.ItemContent>
-      <Accordion.ItemBody />
-    </Accordion.ItemContent>
-  </Accordion.Item>
-</Accordion.Root>
+    <>
+    <Header/>
+    </>
   )
 }
 
