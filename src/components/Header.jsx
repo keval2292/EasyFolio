@@ -1,169 +1,185 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Flex,
   Text,
   HStack,
-  VStack,
   Link,
-  IconButton,
   Box,
+  IconButton,
+  CloseButton,
   Drawer,
-  useDisclosure,
+  Portal,
+  VStack,
 } from "@chakra-ui/react";
 import {
   FiChevronDown,
   FiFacebook,
   FiInstagram,
   FiX,
-  FiMenu,
 } from "react-icons/fi";
+import { CiMenuBurger } from "react-icons/ci";
 
 const Header = () => {
-  const { isOpen, onOpen, onClose } = useDisclosure();
-  const [placement] = useState("right");
-
   return (
-    <Flex
-      w="1200px"
-      px={4}
-      py={3}
-      m={"20px"}
-      bg="white"
-      boxShadow="md"
-      position="relative"
-      zIndex={10}
-      borderRadius={"100px"}
-      justify={"center"}
-      alignItems={"center"}
-    >
+    <Box display="flex" justifyContent="center">
       <Flex
-        as="nav"
-        w="100%"
-        maxW="1200px"
-        mx="auto"
-        align="center"
-        justify="space-between"
-        wrap="wrap"
+        as="header"
+        w="1200px"
+        bg="white"
+        boxShadow="md"
+        position="relative"
+        zIndex={10}
+        justify="center"
+        borderRadius={"100px"}
+        m={"25px"}
       >
-        {/* Logo */}
-        <Text fontSize="24px" fontWeight="bold" color="#0f2943">
-          EasyFolio
-        </Text>
-
-        {/* Desktop Navigation */}
-        <HStack
-          spacing={6}
-          display={{ base: "none", md: "flex" }}
-          justify="center"
-          flex="1"
+        <Flex
+          w="100%"
+          maxW="1200px"
+          bg="white"
+          borderRadius="100px"
+          px={6}
+          py={3}
+          align="center"
+          justify="space-between"
+          wrap="wrap"
         >
-          <Link color="#181d22" _hover={{ color: "orange" }} href="#home">
-            Home
-          </Link>
-          <Link color="#181d22" _hover={{ color: "orange" }} href="#about">
-            About
-          </Link>
-          <Link color="#181d22" _hover={{ color: "orange" }} href="#resume">
-            Resume
-          </Link>
-          <Link color="#181d22" _hover={{ color: "orange" }} href="#portfolio">
-            Portfolio
-          </Link>
-          <Link color="#181d22" _hover={{ color: "orange" }} href="#services">
-            Services
-          </Link>
+          {/* Logo */}
+          <Text fontSize="24px" fontWeight="bold" color="#0f2943">
+            EasyFolio
+          </Text>
 
-          {/* Simulated Dropdown */}
-          <Box position="relative">
-            <Link color="#181d22" _hover={{ color: "orange" }} href="#more">
-              More <FiChevronDown style={{ display: "inline" }} />
+          {/* Desktop Navigation */}
+          <HStack
+            spacing={8} // Increased spacing between links
+            display={{ base: "none", md: "flex" }} // Hidden on small screens, visible on medium and larger
+            justify="center"
+            flex="1"
+          >
+            <Link color="#181d22" _hover={{ color: "orange" }} href="#home">
+              Home
             </Link>
-            {/* Add an actual dropdown here using Menu if needed */}
-          </Box>
-        </HStack>
+            <Link color="#181d22" _hover={{ color: "orange" }} href="#about">
+              About
+            </Link>
+            <Link color="#181d22" _hover={{ color: "orange" }} href="#resume">
+              Resume
+            </Link>
+            <Link
+              color="#181d22"
+              _hover={{ color: "orange" }}
+              href="#portfolio"
+            >
+              Portfolio
+            </Link>
+            <Link color="#181d22" _hover={{ color: "orange" }} href="#services">
+              Services
+            </Link>
+          </HStack>
 
-        {/* Social Icons & Hamburger */}
-        <HStack spacing={4} display={{ base: "none", md: "flex" }}>
-          <Link href="https://www.facebook.com" isExternal>
-            <FiFacebook size={24} color="#3b5998" />
-          </Link>
-          <Link href="https://www.instagram.com" isExternal>
-            <FiInstagram size={24} color="#C13584" />
-          </Link>
-          <Link href="https://x.com" isExternal>
-            <FiX size={24} color="#1DA1F2" />
-          </Link>
-        </HStack>
+          {/* Social Icons & Hamburger */}
+          <HStack spacing={6} display={{ base: "none", md: "flex" }}>
+            <Link href="https://www.facebook.com" isExternal>
+              <FiFacebook size={24} color="#3b5998" />
+            </Link>
+            <Link href="https://www.instagram.com" isExternal>
+              <FiInstagram size={24} color="#C13584" />
+            </Link>
+            <Link href="https://x.com" isExternal>
+              <FiX size={24} color="#1DA1F2" />
+            </Link>
+          </HStack>
 
-        {/* Mobile Menu Button */}
-        <IconButton
-          display={{ base: "flex", md: "none" }}
-          aria-label="Open menu"
-          icon={<FiMenu />}
-          variant="ghost"
-          onClick={onOpen}
-        />
+          {/* Mobile Menu Button */}
+          <Drawer.Root>
+            <Drawer.Trigger asChild>
+              <IconButton
+                aria-label="Menu"
+                variant="ghost"
+                size="lg"
+                display={{ base: "flex", md: "none" }} // Visible on small screens, hidden on medium and larger
+              >
+                <CiMenuBurger />
+              </IconButton>
+            </Drawer.Trigger>
+            <Portal>
+              <Drawer.Backdrop />
+              <Drawer.Positioner>
+                <Drawer.Content>
+                  <Drawer.Context>
+                    {(store) => (
+                      <Drawer.Body pt="6" px="6">
+                        {/* Navigation Links in Drawer */}
+                        <VStack align="start" spacing={6}> {/* Increased spacing */}
+                          <Link
+                            color="#181d22"
+                            _hover={{ color: "orange" }}
+                            href="#home"
+                          >
+                            Home
+                          </Link>
+                          <Link
+                            color="#181d22"
+                            _hover={{ color: "orange" }}
+                            href="#about"
+                          >
+                            About
+                          </Link>
+                          <Link
+                            color="#181d22"
+                            _hover={{ color: "orange" }}
+                            href="#resume"
+                          >
+                            Resume
+                          </Link>
+                          <Link
+                            color="#181d22"
+                            _hover={{ color: "orange" }}
+                            href="#portfolio"
+                          >
+                            Portfolio
+                          </Link>
+                          <Link
+                            color="#181d22"
+                            _hover={{ color: "orange" }}
+                            href="#services"
+                          >
+                            Services
+                          </Link>
+                          <Link
+                            color="#181d22"
+                            _hover={{ color: "orange" }}
+                            href="#more"
+                          >
+                            More
+                          </Link>
+                        </VStack>
+
+                        {/* Social Icons in Drawer */}
+                        <HStack spacing={6} mt={6}> {/* Increased spacing */}
+                          <Link href="https://www.facebook.com" isExternal>
+                            <FiFacebook size={24} color="#3b5998" />
+                          </Link>
+                          <Link href="https://www.instagram.com" isExternal>
+                            <FiInstagram size={24} color="#C13584" />
+                          </Link>
+                          <Link href="https://x.com" isExternal>
+                            <FiX size={24} color="#1DA1F2" />
+                          </Link>
+                        </HStack>
+                      </Drawer.Body>
+                    )}
+                  </Drawer.Context>
+                  <Drawer.CloseTrigger asChild>
+                    <CloseButton size="sm" />
+                  </Drawer.CloseTrigger>
+                </Drawer.Content>
+              </Drawer.Positioner>
+            </Portal>
+          </Drawer.Root>
+        </Flex>
       </Flex>
-
-      {/* Mobile Drawer */}
-   
-      <Drawer.Root placement={placement} onClose={onClose} isOpen={isOpen}>
-        <Drawer.Backdrop />
-        <Drawer.Trigger />
-        <Drawer.Positioner>
-          <Drawer.Content>
-            <Drawer.CloseTrigger />
-            <Drawer.Header>
-              <Drawer.Title />
-            </Drawer.Header>
-
-            <Drawer.Body mt={10}>
-              <VStack align="start" spacing={4}>
-                <Link onClick={onClose} href="#home">
-                  Home
-                </Link>
-                <Link onClick={onClose} href="#about">
-                  About
-                </Link>
-                <Link onClick={onClose} href="#resume">
-                  Resume
-                </Link>
-                <Link onClick={onClose} href="#portfolio">
-                  Portfolio
-                </Link>
-                <Link onClick={onClose} href="#services">
-                  Services
-                </Link>
-                <Link onClick={onClose} href="#blog">
-                  Blog
-                </Link>
-                <Link onClick={onClose} href="#faq">
-                  FAQ
-                </Link>
-                <Link onClick={onClose} href="#support">
-                  Support
-                </Link>
-
-                {/* Mobile Social Icons */}
-                <HStack spacing={4} pt={4}>
-                  <Link href="https://www.facebook.com" isExternal>
-                    <FiFacebook size={20} />
-                  </Link>
-                  <Link href="https://www.instagram.com" isExternal>
-                    <FiInstagram size={20} />
-                  </Link>
-                  <Link href="https://x.com" isExternal>
-                    <FiX size={20} />
-                  </Link>
-                </HStack>
-              </VStack>
-            </Drawer.Body>
-
-            <Drawer.Footer />
-          </Drawer.Content>
-        </Drawer.Positioner>
-      </Drawer.Root>
-    </Flex>
+    </Box>
   );
 };
 
