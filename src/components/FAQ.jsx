@@ -1,5 +1,5 @@
 import { Accordion, Span,Heading,Button,Text,Box } from "@chakra-ui/react";
-import { IoIosArrowUp } from "react-icons/io";
+
 
 const FAQ = () => {
   const items = [
@@ -71,19 +71,6 @@ const FAQ = () => {
           </Accordion.Item>
         ))}
       </Accordion.Root>
-
-      {/* Scroll Up Button (Floating Action Button) */}
-      <Button
-        aria-label="Scroll Up"
-        icon={<IoIosArrowUp />}
-        bg="orange.500"
-        color="white"
-        size="md"
-        position="fixed"
-        bottom={4}
-        right={4}
-        _hover={{ bg: "orange.600" }}
-      />
     </Box>
   );
 };
